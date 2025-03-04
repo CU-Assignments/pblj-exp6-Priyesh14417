@@ -1,1 +1,38 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Student {
+    String name;
+    int marks;
+
+    Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{name='" + name + "', marks=" + marks + '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Priyesh", 88));
+        students.add(new Student("Divam", 72));
+        students.add(new Student("Krishna", 90));
+        students.add(new Student("Dharmesh", 65));
+        students.add(new Student("Ankit", 78));
+
+        List<String> sortedStudentNames = students.stream()
+                .filter(student -> student.marks > 75)
+                .sorted((s1, s2) -> Integer.compare(s2.marks, s1.marks))
+                .map(student -> student.name)
+                .collect(Collectors.toList());
+
+        System.out.println("Students scoring above 75%: " + sortedStudentNames);
+    }
+}
 
